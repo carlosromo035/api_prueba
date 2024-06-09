@@ -1,12 +1,22 @@
-const API_URL = 'https://jsonplaceholder.typicode.com'
+const API_URL = 'https://github.com/franc-ramireza/API.cliente'
 
 const HTMLResponse = document.querySelector("#app");
+const ul =document.createDocumentFragment('ul');
 
 fetch(`${API_URL}/users`)
 .then((Response) => Response.json())
 .then((users) => {
-    const tpl = users.map(user => `<li>${user.name}📨${user.email}</li>`);
-    HTMLResponse.innerHTML = `<ul>${tpl}</ul>`
+    users.forEach(user => {
+        let elem = document.createElement("li");
+        elem.appendChild(
+            document.createTextNode(`${user.id}📨 ${user.razonsocial} ${user.rut} ${user.direccion} ${user.nombre} ${user.apellido} ${user.telefono}`)
+        );
+        ul.appendChild(elem);
+    });
+
+    HTMLResponse.appendChild(ul);
+    // const tpl = users.map(user => `<li>${user.name}📨${user.email}</li>`);
+    // HTMLResponse.innerHTML = `<ul>${tpl}</ul>`
 
 });
 
